@@ -1,0 +1,7 @@
+{
+  "name": "dulich3mien",
+  "version": "0.0.1",
+  "dependencies": {
+    "aws-sdk": "^2.111.0"
+  }
+}
