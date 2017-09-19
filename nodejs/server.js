@@ -30,121 +30,116 @@ http.createServer(function (request, response) {
 
     //analysis request
     const URL = url.parse(request.url);
-console.log("url " +request.url);
+    console.log("url " + request.url);
     console.log("method: " + request.method);
 
     if (request.method == "GET") {
-        var lastIndexOfDot = -1;
-        try {
-            lastIndexOfDot = URL.pathname.lastIndexOf('.');
-        }
-        catch (exception) {
-            lastIndexOfDot = -1;
-        }
-        //compare file type for read file and return context-type in response writeHead
-        if (lastIndexOfDot > 0) {
-            try {
-                var typeFile = URL.pathname.substr(lastIndexOfDot);
-                if (typeFile != null) {
-                    for (var x in mimeType) {
-                        if ("." + x == typeFile) {
-                            fs.readFile(path.public + URL.pathname, function (err, data) {
-                                if (err) {
-                                    response.writeHead(404, "Not found");
-                                    response.end();
-                                }
-                                else {
-                                    response.writeHead(200, { 'content-type': mimeType[x] });
-                                    response.end(data);
-                                }
-                            });
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (exception) {
-                response.end();
-            }
-        }
         switch (URL.pathname.toLowerCase()) {
-            case "/":
+            case "/": {
                 fs.readFile(path.html + "/index.html", function (err, data) {
                     if (err) {
                         response.writeHead(404, "Not found");
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
                 break;
-            case "/view":
-                fs.readFile(path.html + "/view.html", function (err, data) {
-                    if (err) {
-                        response.writeHead(404, "Not found");
-                        response.end();
-                    }
-                    else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
-                        response.end(data);
-                    }
-                });
-                break;
-            case "/themlehoi":
+            }
+            case "/themlehoi": {
                 fs.readFile(path.html + "/ThemLeHoi.html", function (err, data) {
                     if (err) {
                         response.writeHead(404, "Not found");
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
                 break;
-            case "/xoalehoi":
+            }
+            case "/xoalehoi": {
                 fs.readFile(path.html + "/XoaLeHoi.html", function (err, data) {
                     if (err) {
                         response.writeHead(404, "Not found");
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
                 break;
-            case "/themdiadanh":
-                {
-                    console.log("có nè");
-                    fs.readFile(path.html + "/ThemDiaDanh.html", function (err, data) {
-                        if (err) {
-                            response.writeHead(404, "Not found");
-                            response.end();
-                        }
-                        else {
-                            response.writeHead(200, { 'content-type': mimeType.html });
-                            response.end(data);
-                        }
-                    });
-                    break;
-                }
-            case "/xoadiadanh":
+            }
+            case "/themdiadanh": {
+                console.log("có nè");
+                fs.readFile(path.html + "/ThemDiaDanh.html", function (err, data) {
+                    if (err) {
+                        response.writeHead(404, "Not found");
+                        response.end();
+                    }
+                    else {
+                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.end(data);
+                    }
+                });
+                break;
+            }
+            case "/xoadiadanh": {
                 fs.readFile(path.html + "/XoaDiaDanh.html", function (err, data) {
                     if (err) {
                         response.writeHead(404, "Not found");
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
                 break;
-            default:
-                break;
+            }
+            default: {
+                var lastIndexOfDot = -1;
+                try {
+                    lastIndexOfDot = URL.pathname.lastIndexOf('.');
+                }
+                catch (exception) {
+                    lastIndexOfDot = -1;
+                }
+                //compare file type for read file and return context-type in response writeHead
+                if (lastIndexOfDot > 0) {
+                    try {
+                        var typeFile = URL.pathname.substr(lastIndexOfDot);
+                        if (typeFile != null) {
+                            for (var x in mimeType) {
+                                if ("." + x == typeFile) {
+                                    fs.readFile(path.public + URL.pathname, function (err, data) {
+                                        if (err) {
+                                            response.writeHead(404, "Not found");
+                                            response.end();
+                                        }
+                                        else {
+                                            response.writeHead(200, {'content-type': mimeType[x]});
+                                            response.end(data);
+                                        }
+                                    });
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    catch (exception) {
+                        response.writeHead(404, "Not found");
+                    }
+                }
+                else {
+                    response.writeHead(404, "Not found");
+                    response.end();
+                }
+            }
         }
     }
     else if (request.method == "POST") {
