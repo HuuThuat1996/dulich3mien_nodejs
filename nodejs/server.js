@@ -42,7 +42,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -55,7 +55,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -68,7 +68,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -82,7 +82,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -95,7 +95,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -122,7 +122,7 @@ http.createServer(function (request, response) {
                                             response.end();
                                         }
                                         else {
-                                            response.writeHead(200, {'content-type': mimeType[x]});
+                                            response.writeHead(200, { 'content-type': mimeType[x] });
                                             response.end(data);
                                         }
                                     });
