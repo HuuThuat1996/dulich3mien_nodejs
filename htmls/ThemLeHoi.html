@@ -7,7 +7,7 @@
     <title>Du lịch 3 miền</title>
     <link href="../assert/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="../assert/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="./assert/css/animate.css" rel="stylesheet">
+    <link href="../assert/css/animate.css" rel="stylesheet">
     <link href="../assert/css/style.css" rel="stylesheet">
     <link href="../assert/css/jasny-bootstrap.min.css" rel="stylesheet">
     <link href="../assert/css/basic.css" rel="stylesheet">
@@ -23,25 +23,25 @@
                                  </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Nguyễn Hữu Thuật</strong>
-                                 </span> <span class="text-muted text-xs block">admin <b class="caret"></b></span> </span> </a>
+                                 </span> <span class="text-muted text-xs block">Quản trị viên <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a href="login.html">Đăng xuất</a></li>
+                            <li><a href="DangNhap">Đăng xuất</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-map-o"></i> <span class="nav-label">Area</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-map-o"></i> <span class="nav-label">Địa danh</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="AddArea">Add Area</a></li>
-                        <li><a href="DeleteArea">Delete Area</a></li>
+                        <li><a href="ThemDiaDanh">Thêm địa danh</a></li>
+                        <li><a href="XoaDiaDanh">Xóa địa danh</a></li>
 
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="	fa fa-file-image-o"></i> <span class="nav-label">Festival</span><span class="fa arrow"></span></a>
+                    <a href="#"><i class="	fa fa-file-image-o"></i> <span class="nav-label">Lễ hội</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="AddFestival">Add Festival Area</a></li>
-                        <li><a href="DeleteFestival">Delete Festival Area</a></li>
+                        <li><a href="ThemLeHoi">Thêm lễ hội</a></li>
+                        <li><a href="XoaLeHoi">Xóa lễ hội</a></li>
 
                     </ul>
                 </li>
@@ -55,7 +55,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <a href="login.html">
+                        <a href="DangNhap">
                                 <i class="fa fa-sign-out"></i> Đăng xuất
                             </a>
                     </li>
@@ -70,7 +70,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Add area </h5>
+                        <h5>Thêm Lễ Hội </h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -81,70 +81,95 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <form method="POST" class="form-horizontal " action="/AddArea" enctype="multipart/form-data">
-                            <div class="form-group"><label class="col-sm-2 control-label">Area Name : </label>
-                                <div class="col-sm-10"><input type="text" class="form-control" name="AreaName"></div>
+                        <form method="POST" class="form-horizontal" action="/ThemLeHoi">
+                            <div class="form-group"><label class="col-sm-2 control-label">Tên lễ hội : </label>
+                                <div class="col-sm-10"><input type="text" class="form-control" name="TenLeHoi"></div>
                             </div>
                             <div class="hr-line-dashed"></div>
 
-                            <div class="form-group"><label class="col-sm-2 control-label">Address : </label>
-                                <div class="col-sm-10"><input type="text" class="form-control" name="AreaAddress"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label">Địa chỉ : </label>
+                                <div class="col-sm-10"><input type="text" class="form-control" name="ĐiaChi"></div>
                             </div>
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Area Description : </label>
+                            <div class="form-group"><label class="col-sm-2 control-label">Mô tả : </label>
+                                <div class="col-sm-10"><textarea rows="4" cols="50" class="form-control" name="MoTa"></textarea></div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label">Hình nền : </label>
                                 <div class="col-sm-10">
                                     <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                         <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span>
-                                        <span class="fileinput-exists">Change</span><input type="file" name="AreaDescription"></span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group"><label class="col-sm-2 control-label">Image Title : </label>
-                                <div class="col-sm-10">
-                                    <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                        <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select Image</span>
-                                        <span class="fileinput-exists">Change</span><input type="file" name="AreaHeader"></span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Chọn hình</span>
+                                        <span class="fileinput-exists">Thay đổi</span><input type="file" name="HinhNen"></span>
+                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Xóa hình</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
                             <!-- upload multi file -->
-                            <div class="form-group"><label class="col-sm-2 control-label">Image Area : </label>
+                            <div class="form-group"><label class="col-sm-2 control-label">Hình ảnh : </label>
                                 <div class="col-sm-10">
                                     <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                         <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select Image</span>
-                                        <span class="fileinput-exists">Change</span><input type="file" name="AreaImage" multiple></span>
-                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                        <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Chọn hình</span>
+                                        <span class="fileinput-exists">Thay đổi</span><input type="file" name="HinhAnh"
+                                            multiple></span>
+                                        <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Xóa hình</a>
                                     </div>
                                 </div>
                             </div>
-                            <!-- end upload multi file -->
                             <div class="hr-line-dashed"></div>
+                            <div class="form-group" id="data_1">
+                                <label class="col-sm-2 control-label">Ngày bắt đầu : </label>
+                                <div class=" col-sm-10">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" class="form-control" name="NgayBatDau">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group" id="data_1">
+                                <label class="col-sm-2 control-label">Ngày kết thúc : </label>
+                                <div class=" col-sm-10">
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" name="NgayKetThuc" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
                             <div class="form-group">
                                 <div class="col-sm-10"></div>
-                                <div class="col-sm-2"><button class="btn btn-primary" type="submit">Add new area</button></div>
+                                <div class="col-sm-2"><button class="btn btn-primary" type="submit">Thêm lễ hội</button></div>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="../assert/js/jquery-3.1.1.min.js"></script>
-    <script src="../assert/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../assert/bootstrap/dist/js//bootstrap.min.js"></script>
     <script src="../assert/js/jquery-ui.min.js"></script>
     <script src="../assert/js/jquery.metisMenu.js"></script>
     <script src="../assert/js/jquery.slimscroll.min.js"></script>
     <script src="../assert/js/inspinia.js"></script>
     <script src="../assert/js/pace.min.js"></script>
     <script src="../assert/js/jasny-bootstrap.min.js"></script>
+    <script src="../assert/js/dropzone.js"></script>
+    <script src="../assert/js/bootstrap-datepicker.js"></script>
+    <script>
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+    </script>
 
 </body>
 
