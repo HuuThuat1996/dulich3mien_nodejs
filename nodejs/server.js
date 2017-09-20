@@ -145,11 +145,6 @@ console.log("url " +request.url);
                     }
                 });
                 break;
-<<<<<<< HEAD
-            default:
-                break;
-=======
-            }
             default: {
                 var lastIndexOfDot = -1;
                 try {
@@ -190,7 +185,6 @@ console.log("url " +request.url);
                     response.end();
                 }
             }
->>>>>>> b7c19c4d032c519e9ba5c3e4174b5acb0265701b
         }
     }
     else if (request.method == "POST") {
