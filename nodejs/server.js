@@ -124,6 +124,7 @@ http.createServer(function (request, response) {
                                         }
                                         else {
                                             response.writeHead(200, {'content-type': mimeType[x]});
+                                            response.writeHead(200, { 'content-type': mimeType[x] });
                                             response.end(data);
                                         }
                                     });
