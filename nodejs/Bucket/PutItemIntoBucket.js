@@ -3,8 +3,8 @@ var fs = require('fs');
 AWS.config.loadFromPath('./pathToJsonFile.json');
 exports.PutItem = function (_BucketName, _ItemKey, _File) {
     //var _BucketName = "DuLich3Mien";
-    //var _ItemKey = "Nam.jpg";
-    //var _File = "../../nam.jpg";
+  //  var _ItemKey = "Nam.jpg";
+   // var _File = "../../nam.jpg";
     var s3Bucket = new AWS.S3({ params: { Bucket: _BucketName } })
     var data = {
         Key: _ItemKey,

@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var festivalRepository = require('./festivalRepository');
 
+var getItems = require("./Bucket/GetListItemInBucket");
 //common
 /*mimeType
 **************************************/
@@ -43,7 +44,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -56,7 +57,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -69,7 +70,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -83,7 +84,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -96,7 +97,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, {'content-type': mimeType.html});
+                        response.writeHead(200, { 'content-type': mimeType.html });
                         response.end(data);
                     }
                 });
@@ -123,7 +124,7 @@ http.createServer(function (request, response) {
                                             response.end();
                                         }
                                         else {
-                                            response.writeHead(200, {'content-type': mimeType[x]});
+                                            response.writeHead(200, { 'content-type': mimeType[x] });
                                             response.writeHead(200, { 'content-type': mimeType[x] });
                                             response.end(data);
                                         }
@@ -161,6 +162,18 @@ http.createServer(function (request, response) {
                         console.log("ImageTile: " + model.ImageTitle + "\n");
                         console.log("Image: " + model.Image + "\n");
                         //1, Thêm hình đại diện vào Bucket hình ảnh
+                        // createBucket(model.FestivalName, model.FestivalName);
+                        // put hình đại diện
+                        // putItems(model.FestivalName, "HinhDaiDien", "đường dẫn file");
+                        // put danh sách các file trong image
+                        // putItems(model.FestivalName, "ten cua file . phần mở rộng", "đường dẫn của file");
+                         getItems.GetList("DuLich3Mien",function(_lst){
+                            var a = _lst.split('%');
+                            for (i = 0; i < a.lenght; i++) {
+                                console.log("link " + a[i]);
+                            }
+                        });
+                        
                         //2, Lấy thông tin hình đại diện trên s3 với cấu trúc
                         /*{
                             public_id: '',
@@ -178,6 +191,7 @@ http.createServer(function (request, response) {
                             name:''
                         }*/
                         //3, Tương tự như trên nhưng làm với nhiều hình ảnh
+
                         //4, Thêm thông tin festival vào dynamodb sử dụng hàm festivalRepository.addFestival()
                         //5, Trả kết quả thực hiện lại cho client
                         break;
