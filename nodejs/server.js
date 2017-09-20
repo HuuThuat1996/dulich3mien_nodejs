@@ -1,6 +1,7 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
+var festivalRepository = require('./festivalRepository');
 
 //common
 /*mimeType
@@ -42,7 +43,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
@@ -55,7 +56,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
@@ -68,7 +69,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
@@ -82,7 +83,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
@@ -95,7 +96,7 @@ http.createServer(function (request, response) {
                         response.end();
                     }
                     else {
-                        response.writeHead(200, { 'content-type': mimeType.html });
+                        response.writeHead(200, {'content-type': mimeType.html});
                         response.end(data);
                     }
                 });
@@ -122,6 +123,7 @@ http.createServer(function (request, response) {
                                             response.end();
                                         }
                                         else {
+                                            response.writeHead(200, {'content-type': mimeType[x]});
                                             response.writeHead(200, { 'content-type': mimeType[x] });
                                             response.end(data);
                                         }
@@ -143,13 +145,50 @@ http.createServer(function (request, response) {
         }
     }
     else if (request.method == "POST") {
+
         request.on('data', function (chunk) {
             var urlFull = request.url + "?" + chunk;
             var model = url.parse(urlFull, true).query;
-            switch (URL.pathname.toLowerCase()) {
-                case "/addfestival":
 
-                    break;
+            switch (URL.pathname.toLowerCase()) {
+                case "/themlehoi": {
+                    try {
+                        console.log("FestivalName: " + model.FestivalName + "\n");
+                        console.log("StartDate: " + model.StartDate + "\n");
+                        console.log("EndDate: " + model.EndDate + "\n");
+                        console.log("Address: " + model.Address + "\n");
+                        console.log("Descript: " + model.Descript + "\n");
+                        console.log("ImageTile: " + model.ImageTitle + "\n");
+                        console.log("Image: " + model.Image + "\n");
+                        //1, Thêm hình đại diện vào Bucket hình ảnh
+                        //2, Lấy thông tin hình đại diện trên s3 với cấu trúc
+                        /*{
+                            public_id: '',
+                            version: ,
+                            signature: '',
+                            width: ,
+                            height: ,
+                            format: '',
+                            resource_type: '',
+                            created_at: '2017-06-46:03Z',
+                            bytes: ,
+                            type: '',
+                            url: '',
+                            secure_url: '',
+                            name:''
+                        }*/
+                        //3, Tương tự như trên nhưng làm với nhiều hình ảnh
+                        //4, Thêm thông tin festival vào dynamodb sử dụng hàm festivalRepository.addFestival()
+                        //5, Trả kết quả thực hiện lại cho client
+                        break;
+                    }
+                    catch (exception) {
+                        console.error("Exception. exception JSON:", JSON.stringify(err, null, 2));
+                        response.writeHead();
+                        response.end();
+                    }
+                }
+
                 default:
                     break;
             }
