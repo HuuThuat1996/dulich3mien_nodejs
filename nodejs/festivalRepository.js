@@ -15,26 +15,25 @@ AWS.config.loadFromPath('./Bucket/pathToJsonFile.json');
 exports.addFestival = function (festivalName, startDate, endDate, address, descript, imageTitle, image, callback) {
     //*************s3
     //Create bucket
-    bucket.createBucket(festivalName, festivalName, function (resultCreateBucket) {
+    bucket.createBucket(festivalName, function (resultCreateBucket) {
         if (!resultCreateBucket) {
             callback(-1);
         }
         else {
             //put image title
-        
             bucket.PutItem(festivalName, imageTitle, function (_imageTitle) {
                 if (_imageTitle == null) {
-                    bucketRepository.DeleteObjects(festivalName);
+                    bucket.removeBucket(festivalName);
                     callback(-2);
                 }
                 else {
                     //put images
                     bucket.PutItems(festivalName, image, function (_images) {
-                        console.log("Images: " +JSON.stringify(_images,null, 2));
                         //**********************end s3
                         //create festival model
                         var festivalModel = {
                             "FestivalName": festivalName,
+                            "FestivalID": festivalName+endDate,
                             "StartDate": startDate,
                             "EndDate": endDate,
                             "Address": address,
@@ -43,14 +42,19 @@ exports.addFestival = function (festivalName, startDate, endDate, address, descr
                             "Image": _images
                         };
                         //add data to dynamodb
-                        var docClient = new AWS.DynamoDB().DocumentClient();
-                        docClient.put(festivalModel, function (err, data) {
+                        var params = {
+                            "TableName":"Festival",
+                            "Item": festivalModel
+                        };
+                        console.log("params: "+ JSON.stringify(params,null,2));
+                        var docClient = new AWS.DynamoDB.DocumentClient();
+                        docClient.put(params, function (err, data) {
                             if (err) {
                                 console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-                                bucketRepository.DeleteBucket(festivalName);
+                                bucket.removeBucket(festivalName);
                                 callback(-3);
                             } else {
-                                console.log("Added item:", JSON.stringify(data, null, 2));
+                                console.log("Added item");
                                 callback(0);
                             }
                         });
