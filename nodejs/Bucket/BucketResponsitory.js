@@ -131,7 +131,7 @@ exports.DeleteBucket = function (_BucketName) {
                         console.log(err, err.stack);
                     else {
                         console.log(data);
-                      
+                       
                     }
 
                 });
