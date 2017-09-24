@@ -21,6 +21,7 @@ exports.addFestival = function (festivalName, startDate, endDate, address, descr
         }
         else {
             //put image title
+        
             bucket.PutItem(festivalName, imageTitle, function (_imageTitle) {
                 if (_imageTitle == null) {
                     bucketRepository.DeleteObjects(festivalName);
@@ -29,6 +30,7 @@ exports.addFestival = function (festivalName, startDate, endDate, address, descr
                 else {
                     //put images
                     bucket.PutItems(festivalName, image, function (_images) {
+                        console.log("Images: " +JSON.stringify(_images,null, 2));
                         //**********************end s3
                         //create festival model
                         var festivalModel = {
