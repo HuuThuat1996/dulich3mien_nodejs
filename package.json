@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "aws-sdk": "^2.111.0",
-    "diacritic": "0.0.2"
+    "diacritic": "0.0.2",
+    "formidable": "^1.1.1"
+
   }
 }
