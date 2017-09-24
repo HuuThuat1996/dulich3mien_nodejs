@@ -1,5 +1,6 @@
 var AWS = require('aws-sdk');
 var fs = require('fs');
+var Diacritics = require('diacritic');
 AWS.config.loadFromPath('./Bucket/pathToJsonFile.json');
 var s3 = new AWS.S3();
 // Create bucket with every name of Festival or Area
@@ -7,8 +8,14 @@ exports.createBucket = function (_BucketName, _BucketKey, _ItemKey, _File) {
     // Bucket names must be unique across all S3 users
     //_BucketName ="DuLich3Mien";
     // _BucketKey="DuLich3MienKey";
-    var myBucket = _BucketName;
-    var myKey = _BucketKey;
+    var noneSign = Diacritics.clean(_BucketName).trim();
+    var name = "";
+    for (i = 0; i < noneSign.length; i++) {
+        if (noneSign[i] != ' ') {
+            name += noneSign[i];
+        }
+    }
+    var myBucket = name;
     s3.createBucket({ Bucket: myBucket }, function (err, data) {
         if (err) {
             console.log(err);
@@ -39,17 +46,12 @@ exports.PutItem = function (_BucketName, _ItemKey, _File) {
 // get list link of bucket with Name and return array link
 exports.GetList = function (_BucketName, callback) {
     var lstArray = "";
-    var params = { Bucket: _BucketName };
-    s3.listObjects(params, function (err, data) {
-        var bucketContents = data.Contents;
-        for (var i = 0; i < bucketContents.length; i++) {
-            var urlParams = { Bucket: _BucketName, Key: bucketContents[i].Key };
-            s3.getSignedUrl('getObject', urlParams, function (err, url) {
-                lstArray += url.substring(0, url.indexOf("?")) + "%";
-                callback(lstArray);
-            });
-        }
+    var urlParams = { Bucket: _BucketName, Key: bucketContents[i].Key };
+    s3.getSignedUrl('getObject', urlParams, function (err, url) {
+        lstArray += url.substring(0, url.indexOf("?"));
+
     });
+
 }
 // Delete a Bucket and all Object in this Bucket 
 exports.DeleteObjects = function (_BucketName) {
@@ -75,18 +77,19 @@ exports.DeleteObjects = function (_BucketName) {
                     if (err) console.log(err, err.stack);
                     else {
                         console.log(data);
-                        s3.deleteBucket({ Bucket: _BucketName }, function (err, data) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                console.log("Delete successfull !!!");
-                            }
-                        });
+
                     }
 
                 });
 
             });
+        }
+    });
+    s3.deleteBucket({ Bucket: _BucketName }, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Delete successfull !!!");
         }
     });
 }
