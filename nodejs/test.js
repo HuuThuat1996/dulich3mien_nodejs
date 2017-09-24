@@ -1,3 +1,4 @@
+
 var AWS = require('aws-sdk');
 var fs = require('fs');
 var Diacritics = require('diacritic');
@@ -31,3 +32,11 @@ function emptyBucket(bucketName,callback){
       });
     });
   }
+
+var get = require('./Bucket/aaa');
+
+get.getlist(function(kq){
+    var ddd = kq;
+    console.log(kq);
+});
+
