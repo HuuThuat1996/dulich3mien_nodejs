@@ -1,8 +1,5 @@
 var AWS = require("aws-sdk");
 AWS.config.loadFromPath('./Bucket/pathToJsonFile.json');
-AWS.config.update({
-    endpoint: "http://localhost:8000"
-});
 
 var dynamodb = new AWS.DynamoDB();
 
