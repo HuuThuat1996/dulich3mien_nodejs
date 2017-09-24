@@ -131,18 +131,19 @@ exports.DeleteBucket = function (_BucketName) {
                         console.log(err, err.stack);
                     else {
                         console.log(data);
-                        s3.deleteBucket({Bucket: bucketName}, function (err, data) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                console.log("Delete successfull !!!");
-                            }
-                        });
+                      
                     }
 
                 });
 
             });
+        }
+    });
+    s3.deleteBucket({Bucket: bucketName}, function (err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Delete successfull !!!");
         }
     });
 };
