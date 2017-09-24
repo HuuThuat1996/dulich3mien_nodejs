@@ -10,13 +10,13 @@ var dynamodb = new AWS.DynamoDB();
 var FestivalTable = {
     TableName: "Festival",
     KeySchema: [
-        { AttributeName: "FestivalName", KeyType: "HASH" },
-        { AttributeName: "FestivalID", KeyType: "RANGE" },  //Partition key
+        { AttributeName: "FestivalID", KeyType: "HASH" },
+        { AttributeName: "FestivalName", KeyType: "RANGE" },  //Partition key
 
     ],
     AttributeDefinitions: [
-        { AttributeName: 'FestivalName', AttributeType: 'S' },
-        { AttributeName: "FestivalID", AttributeType: "S" },
+        { AttributeName: 'FestivalID', AttributeType: 'S' },
+        { AttributeName: "FestivalName", AttributeType: "S" },
       
     ],
     ProvisionedThroughput: {
